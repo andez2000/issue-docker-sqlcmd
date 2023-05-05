@@ -16,19 +16,7 @@ ENTRYPOINT [ "/bin/bash", "-c", "\
     echo 'Waiting for SQL Server to start...'; \
     sleep 5; \
   done; \
-  echo \"Running creation scripts with $DB_NAME\"; \
-  for file in $(ls /database/scripts/creation/*.sql | sort -V); do \
-    echo \"Executing $file\"; \
-    /opt/mssql-tools/bin/sqlcmd \
-      -S sql-server,1433 \
-      -U \"$SA_USERNAME\" \
-      -P \"$SA_PASSWORD\" \
-      -i \"$file\" \
-      -r1; \
-  done; \
-  sleep 2; \
   echo \"Running schema scripts with $DB_NAME\"; \
-  for file in $(ls /database/scripts/schema/*.sql | sort -V); do \
     echo \"Executing $file\"; \
     /opt/mssql-tools/bin/sqlcmd \
       -S sql-server,1433 \
@@ -36,7 +24,6 @@ ENTRYPOINT [ "/bin/bash", "-c", "\
       -P \"$SA_PASSWORD\" \
       -d \"$DB_NAME\" \
       -v xxxx=\"abcd\" \
-      -i \"$file\" \
-      -r1; \
-  done" \
+      -i \"/database/i-will-not-run.sql\" \
+      -r1;" \
 ]
