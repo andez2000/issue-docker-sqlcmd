@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  sql-server:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: sql-server
+    environment:
+      SA_PASSWORD: "LetMeIn2023"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1436:1433"
+    networks:
+      - app-network-2
+
+  sql-script-runner:
+    build:
+      context: ../
+      dockerfile: ./docker/sql-script-runner.dockerfile
+      args:
+        DB_NAME: 'booyakasha'
+        SA_USERNAME: 'sa'
+        SA_PASSWORD: 'LetMeIn2023'
+    container_name: sql-script-runner
+    depends_on:
+      - sql-server
+    networks:
+      - app-network-2
+
+networks:
+  app-network-2:
+    driver: bridge
