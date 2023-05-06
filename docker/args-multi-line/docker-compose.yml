@@ -4,7 +4,7 @@ services:
   hello-world-container:
     build:
       context: ../../
-      dockerfile: ./docker/args/hello-world.dockerfile
+      dockerfile: ./docker/args-multi-line/hello-world.dockerfile
       args:
         - CUSTOM_MESSAGE=This is the message passed from docker-compose
     container_name: hello-world
