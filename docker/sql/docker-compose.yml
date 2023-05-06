@@ -10,9 +10,9 @@ services:
     ports:
       - "1436:1433"
     networks:
-      - app-network-2
+      - app-network-3
 
-  sql-script-runner:
+  sql-script-runner-3:
     build:
       context: ../
       dockerfile: ./docker/sql-script-runner.dockerfile
@@ -20,12 +20,12 @@ services:
         DB_NAME: 'booyakasha'
         SA_USERNAME: 'sa'
         SA_PASSWORD: 'LetMeIn2023'
-    container_name: sql-script-runner
+    container_name: sql-script-runner-3
     depends_on:
       - sql-server
     networks:
-      - app-network-2
+      - app-network-3
 
 networks:
-  app-network-2:
+  app-network-3:
     driver: bridge

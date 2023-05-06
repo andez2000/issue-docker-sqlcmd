@@ -1,3 +1,4 @@
+```dockerfile
 FROM mcr.microsoft.com/mssql-tools
 
 ARG DB_NAME
@@ -16,14 +17,16 @@ ENTRYPOINT [ "/bin/bash", "-c", "\
     echo 'Waiting for SQL Server to start...'; \
     sleep 5; \
   done; \
-  echo \"Running schema scripts with $DB_NAME\"; \
-    echo \"Executing $file\"; \
+  echo \"Haway, im ganna snooze...\"; \
+  sleep 60; \
+  echo \"Running script my arse\"; \
     /opt/mssql-tools/bin/sqlcmd \
       -S sql-server,1433 \
       -U \"$SA_USERNAME\" \
       -P \"$SA_PASSWORD\" \
-      -d \"$DB_NAME\" \
-      -v xxxx=\"abcd\" \
-      -i \"/database/i-will-not-run.sql\" \
+      -i \"/database/create-db.sql\" \
+      -m-1 \
+      -V 0 \
       -r1;" \
 ]
+```

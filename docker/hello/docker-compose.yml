@@ -3,8 +3,8 @@ version: '3'
 services:
   hello-world-container:
     build:
-      context: ../
-      dockerfile: ./docker-hello/hello-world.dockerfile
+      context: ../../
+      dockerfile: ./docker/hello/hello-world.dockerfile
     container_name: hello-world
     networks:
       - hello-world-network
