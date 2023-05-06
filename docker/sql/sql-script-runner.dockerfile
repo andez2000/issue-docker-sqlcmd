@@ -17,17 +17,10 @@ CMD /bin/sh -c \
     echo 'Waiting for SQL Server to start...'; \
     sleep 5; \
   done; \
-  echo 'Running schema scripts with $DB_NAME'; \
-    export xxxx='abcd'; \
+  echo "Running schema scripts with $DB_NAME"; \
     /opt/mssql-tools/bin/sqlcmd \
       -S sql-server,1433 \
       -U $SA_USERNAME \
       -P $SA_PASSWORD \
-      -i "database/i-will-not-run.sql" \
+      -i "database/create-db.sql" \
       -r1;
-
-
-# CMD /bin/sh -c " \
-#     echo 'This is a separate echo: $DB_NAME'; \
-#     echo $DB_NAME && \
-#     sleep infinity"
