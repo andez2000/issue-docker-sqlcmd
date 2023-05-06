@@ -9,3 +9,4 @@ CMD /bin/sh -c " \
     echo 'This is a separate echo: $CUSTOM_MESSAGE'; \
     echo $CUSTOM_MESSAGE && \
     sleep infinity"
+    

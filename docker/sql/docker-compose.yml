@@ -14,12 +14,12 @@ services:
 
   sql-script-runner-3:
     build:
-      context: ../
-      dockerfile: ./docker/sql-script-runner.dockerfile
+      context: ../../
+      dockerfile: ./docker/sql/sql-script-runner.dockerfile
       args:
-        DB_NAME: 'booyakasha'
-        SA_USERNAME: 'sa'
-        SA_PASSWORD: 'LetMeIn2023'
+        - DB_NAME=booyakasha
+        - SA_USERNAME=sa
+        - SA_PASSWORD=LetMeIn2023
     container_name: sql-script-runner-3
     depends_on:
       - sql-server

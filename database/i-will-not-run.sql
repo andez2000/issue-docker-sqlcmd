@@ -1,1 +1,1 @@
-print 'This should print ok';
+print 'This should print ok $(DB_NAME)';

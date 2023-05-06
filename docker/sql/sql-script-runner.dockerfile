@@ -1,5 +1,33 @@
-FROM 
+FROM mcr.microsoft.com/mssql-tools
 
-RUN echo "We see run commands as part of the build"
+ARG DB_NAME=PLEASE-SET
+ENV DB_NAME=$DB_NAME
 
-ENTRYPOINT [ "sleep", "infinity" ]
+ARG SA_USERNAME=sa
+ENV SA_USERNAME=$SA_USERNAME
+
+ARG SA_PASSWORD=PLEASE-SET
+ENV SA_PASSWORD=$SA_PASSWORD
+
+COPY ./database /database
+
+CMD /bin/sh -c \
+  echo 'Running script...'; \
+  until /opt/mssql-tools/bin/sqlcmd -S sql-server,1433 -U $SA_USERNAME -P $SA_PASSWORD -Q 'SELECT 1' &> /dev/null; do \
+    echo 'Waiting for SQL Server to start...'; \
+    sleep 5; \
+  done; \
+  echo 'Running schema scripts with $DB_NAME'; \
+    export xxxx='abcd'; \
+    /opt/mssql-tools/bin/sqlcmd \
+      -S sql-server,1433 \
+      -U $SA_USERNAME \
+      -P $SA_PASSWORD \
+      -i "database/i-will-not-run.sql" \
+      -r1;
+
+
+# CMD /bin/sh -c " \
+#     echo 'This is a separate echo: $DB_NAME'; \
+#     echo $DB_NAME && \
+#     sleep infinity"
