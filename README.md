@@ -22,6 +22,14 @@ docker-compose -f docker/hello/docker-compose.yml build --force-rm --no-cache --
 docker-compose -f docker/hello/docker-compose.yml -p hello-world up --build
 ```
 
+### ARGS
+
+```console
+docker-compose -f docker/args/docker-compose.yml -p hello-world down --remove-orphans 
+docker-compose -f docker/args/docker-compose.yml build --force-rm --no-cache --progress=plain hello-world-container
+docker-compose -f docker/args/docker-compose.yml -p hello-world up --build
+```
+
 ## Issues
 
 A dump of commands...
